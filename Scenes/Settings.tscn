@@ -1,0 +1,42 @@
+[gd_scene format=2]
+
+[node name="Settings" type="Control"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TabContainer" type="TabContainer" parent="."]
+margin_right = 420.0
+margin_bottom = 220.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Audio" type="Tabs" parent="TabContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = 36.0
+margin_bottom = 20.0
+
+[node name="Master" type="Label" parent="TabContainer/Audio"]
+margin_left = 35.7082
+margin_top = 25.4421
+margin_right = 79.7082
+margin_bottom = 39.4421
+text = "Master"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Display" type="Tabs" parent="TabContainer"]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 4.0
+margin_top = 32.0
+margin_right = -4.0
+margin_bottom = -4.0

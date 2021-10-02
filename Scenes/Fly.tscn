@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Graphics/Enemies/flyFly1.png" type="Texture" id=2]
+[ext_resource path="res://Graphics/Enemies/flyFly2.png" type="Texture" id=3]
+[ext_resource path="res://Scripts/Fly.gd" type="Script" id=4]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"loop": true,
+"name": "fly",
+"speed": 5.0
+} ]
+
+[sub_resource type="Animation" id=2]
+length = 8.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 6, 8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( -200, 0 ), Vector2( 200, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimatedSprite:flip_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 2, 6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+
+[node name="Fly" instance=ExtResource( 1 )]
+script = ExtResource( 4 )
+
+[node name="Area2D" parent="." index="0"]
+position = Vector2( 0, 0 )
+
+[node name="AnimatedSprite" parent="Area2D" index="0"]
+frames = SubResource( 1 )
+animation = "fly"
+
+[node name="AnimationPlayer" parent="Area2D" index="2"]
+anims/fly = SubResource( 2 )
+
+[node name="RayCast2D" type="RayCast2D" parent="Area2D" index="4"]
+position = Vector2( -50, 0.353 )
+enabled = true
+cast_to = Vector2( -500, 0 )
+
+[node name="Timer" type="Timer" parent="Area2D" index="5"]
+
+[node name="FireTimer" type="Timer" parent="Area2D" index="6"]
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="timeout" from="Area2D/FireTimer" to="." method="_on_FireTimer_timeout"]
